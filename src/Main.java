@@ -12,20 +12,18 @@ public class Main {
 		System.out.println("Enter a list of numbers seperated by 'space' press enter when done...");
 		var input = scanner.nextLine();
 
-		//take care of leading and trailing spaces
 		input = input.trim();
 
-		//make sure it's digits
 		var integerRegex = "[0-9- ]+";
 
-		if (!Pattern.matches(integerRegex, input)){
+		if (!Pattern.matches(integerRegex, input)) {
 			System.out.println("Invalid Input, Only digits are allowed");
 			input = scanner.nextLine();
 		}
 
 		var arrString = input.split(" ");
 		var arr = Arrays.stream(arrString).mapToInt(Integer::parseInt).toArray();
-		System.out.println("Result: "+smallestNonOccurringPositiveNumber(arr));
+		System.out.println("Result: " + smallestNonOccurringPositiveNumber(arr));
 	}
 
 	public static int smallestNonOccurringPositiveNumber(int[] arr) {
@@ -33,6 +31,5 @@ public class Main {
 		Arrays.stream(arr).forEach(hashSet::add);
 
 		return IntStream.rangeClosed(1, arr.length + 1).filter(i -> !hashSet.contains(i)).findFirst().orElse(1);
-
 	}
 }
